@@ -92,9 +92,19 @@ while data_inicio != date(2023, 6, 1):
     data_fim = data_inicio + relativedelta(months=1) - relativedelta(days=1)
 
 
+def filtrar_por_titulo(titulo):
+    string = titulo.lower()
+    palavras_chave = ['covid', 'corona', 'oms', 'vírus', 'virus']
+    for palavra in palavras_chave:
+        if palavra in string:
+            return True
+    return False
+
+
 df = dados.copy()
 df['url'] = df.url.apply(extrair_url)
 df = df[df.url.apply(filtrar_urls)]
+df = df[df.titulo.apply(filtrar_por_titulo)]
 df['data'] = df.data.apply(extrair_data)
 df['img'] = df.img.apply(ajustar_imagem)
 df = df.rename({'img': 'media', 'titulo': 'content'}, axis=1)
