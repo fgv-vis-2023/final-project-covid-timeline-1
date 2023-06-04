@@ -8,6 +8,7 @@ from urllib.parse import unquote
 import random
 from time import sleep
 import re
+import json
 
 
 def random_user_agent():
@@ -115,5 +116,5 @@ df = df.fillna('').drop_duplicates()
 
 j = df.groupby('data').apply(lambda g: g.drop('data', axis=1).to_dict(orient='records')).to_dict()
 text_file = open("../data/g1.json", "w")
-text_file.write(str(j))
+text_file.write(json.dumps(j))
 text_file.close()
