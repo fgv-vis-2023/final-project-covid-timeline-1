@@ -30,8 +30,27 @@
     <ul id="toplist">
     </ul>
   </div>
-  <div id="news-carousel">
+  <!--Add a news mode toggle switch at top right-->
+  <div id="news-mode">
+    <label class="switch" id="news-switch">
+      <input type="checkbox" id="news-mode-toggle">
+      <span class="slider round"></span>
+    </label>
+    <p>News Mode</p>
+  </div>
+  
+  <!--Add a select input with the options: All, Uol, UN, G1-->
+  <div id="news-source">
+    <select id="selectsource">
+      <option value="all">All Media Sources</option>
+      <option value="uol">Uol</option>
+      <option value="un">UN</option>
+      <option value="g1">G1</option>
+    </select>
+  </div>
 
+  <div id="news-carousel">
+    <a href="#" id="title-anchor" target="_blank">Title</a>
   </div>
   <div id="chart"></div>
   <!--Add a '-' before the button play and a '+' after the button play-->

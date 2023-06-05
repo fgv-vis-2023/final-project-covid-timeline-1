@@ -31,12 +31,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
     d3.json('./data/world_countries.json'),
     d3.json('./data/data.json'),
     d3.json('./data/country-iso-map.json'),
-    d3.json('./data/pages_dict.json'),
+    d3.json('./data/un.json'),
+    d3.json('./data/uol.json'),
+    d3.json('./data/g1.json')
+
   ]).then((res) => {
+    console.log(res)
     // Dimensions
     const width = 1200
     const height = 600
-    console.log(res)
     // SVG init
     const svg = d3
       .select('#chart')
@@ -56,13 +59,24 @@ document.addEventListener('DOMContentLoaded', function (event) {
     let data = res[1]
     // Country ISO code map
     const isoMap = res[2]
-    // Pages dict
-    const pagesDict = res[3]
-  
+    // UN news data
+    const un = res[3]
+    // UOL news data
+    const uol = res[4]
+    // G1 news data
+    const g1 = res[5]
+
+    const news_data = {
+      'All': {...un, ...uol, ...g1},
+      'UN': un,
+      'UOL': uol,
+      'G1': g1
+    }
+
     // Create a dictionary to map iso codes to country names
     const isoDict = {}
     isoMap.forEach(v => { isoDict[v['alpha-3']] = v.name })
- 
+  
     // Color scale (we use threshold scale)
     const color = d3.scaleThreshold()
       .domain([1000, 10000, 50000, 100000, 250000, 500000, 1000000])
@@ -157,13 +171,59 @@ document.addEventListener('DOMContentLoaded', function (event) {
     }
     
     function updateSelectedDateNews() {
-      console.log(date)
+      const newsTitleAnchor = document.getElementById('title-anchor')
+      const newsCarousel = document.getElementById('news-carousel')
+      if(selectedDate in un) {
+        newsTitleAnchor.textContent = 'UN: ' + un[selectedDate][0].content
+        newsTitleAnchor.href = un[selectedDate][0].news_url
+        newsCarousel.style.backgroundImage = `url(${un[selectedDate][0].media})`
+        newsCarousel.style.backgroundSize = 'cover'
+        newsCarousel.style.backgroundRepeat = 'no-repeat'
+      }else {
+        if(selectedDate in uol) {
+          newsTitleAnchor.textContent = 'UOL: ' + uol[selectedDate][0].content
+          newsTitleAnchor.href = uol[selectedDate][0].news_url
+          newsCarousel.style.backgroundImage = `url(${uol[selectedDate][0].media})`
+          newsCarousel.style.backgroundSize = 'cover'
+          newsCarousel.style.backgroundRepeat = 'no-repeat'
+        }
+      }
     }
- 
+    
+    const newsMode = document.getElementById('news-mode-toggle')
+    let newsModeBool = newsMode.checked
+    /* on click, print the state on or off */
+    newsMode.addEventListener('click', () => {
+      newsModeBool = newsMode.checked
+      if (play) {
+        document.getElementById('play').click()
+      }
+      if (newsModeBool) {
+        document.getElementById('news-carousel').style.display = 'block'
+        document.getElementById('news-source').style.display = 'block'
+        document.getElementById('minus').style.display = 'none'
+        document.getElementById('plus').style.display = 'none'
+        document.getElementById('steps').textContent = 'Start News Animation'
+        
+      }
+      else {
+        document.getElementById('news-carousel').style.display = 'none'
+        document.getElementById('news-source').style.display = 'none'
+        document.getElementById('minus').style.display = 'block'
+        document.getElementById('plus').style.display = 'block'
+        document.getElementById('steps').textContent = `Steps: ${speed} days`
+      }
+    })
+    newsMode.click()
+
+    // update the data based on the selected source
+    document.getElementById('selectsource').addEventListener('change', () => {
+      selectedSource = document.getElementById('selectsource').value
+      console.log(selectedSource)
+    })
  
     function redraw () {
       svg.selectAll('g.countries').remove()
-      console.log(selectedDate)
       const dataByID = {}
       const dataByDate = data.filter(v => v.date === selectedDate)
       dataByDate.forEach(v => { dataByID[v.iso_code] = v[selectedVar] })
@@ -295,14 +355,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
         play = true;
         document.getElementById('play').textContent = 'Stop';
       }
-      while(slider.value() < 1200 & play) {
-        slider.value(slider.value() + speed);
-        await new Promise(r => setTimeout(r, 75));
-        if(slider.value() >= 1200) {
-          play = false;
-          document.getElementById('play').textContent = 'Play';
-          slider.value(0)
-          break;
+      if (!newsModeBool) {
+        while(slider.value() < 1200 & play) {
+          slider.value(slider.value() + speed);
+          await new Promise(r => setTimeout(r, 75));
+          if(slider.value() >= 1200) {
+            play = false;
+            document.getElementById('play').textContent = 'Play';
+            slider.value(0)
+            break;
+          }
         }
       }
     })
