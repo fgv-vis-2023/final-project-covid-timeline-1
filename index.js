@@ -104,10 +104,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
  
     // Function to redraw the map based on the selected date
     const tooltip = d3
-      .select('body')
-      .append('div')
-      .attr('class', 'tooltip')
-      .style('opacity', 0);
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0)
+    .style('background-color', 'rgba(0, 0, 0, 0.8)')
+    .style('color', 'white')
+    .style('border-radius', '5px')
+    .style('padding', '10px');
  
     // Function to open the modal
     function openModal(countryName) {
@@ -141,7 +145,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
           {
             label: naming_dict[selectedVar],
             data: values,
-            backgroundColor: 'black'
+            backgroundColor: 'rgb(139, 0, 0)',
+            borderColor: 'rgb(139, 0, 0)',
+            borderWidth: 1
           }
         ]
       };
