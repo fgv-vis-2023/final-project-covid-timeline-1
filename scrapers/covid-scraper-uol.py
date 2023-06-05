@@ -2071,7 +2071,7 @@ def get_page_content(page_url):
         if date_str != '' and content_str != '' and media_url != '':
             if date_str not in pages_dict:
                 pages_dict[date_str] = []
-            pages_dict[date_str].append({'content': content_str, 'media': media_url, 'news_url': news_url ,'source': 'UN'})
+            pages_dict[date_str].append({'content': content_str, 'media': media_url, 'news_url': news_url ,'source': 'UOL'})
 for page_url in urls:
     print(page_url)
     #stop for 0.05 seconds
