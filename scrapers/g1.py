@@ -51,7 +51,7 @@ def pegar_noticias_pagina(pagina):
 
 
 def extrair_url(string):
-    return re.search('(?<=&u=)https:.*', string).group()
+    return re.search('(?<=&u=)https:.*(?=&syn)', string).group()
 
 
 def filtrar_urls(string):
@@ -101,15 +101,15 @@ def filtrar_por_titulo(titulo):
             return True
     return False
 
-
+dados = pd.read_pickle('/home/cleomar/Downloads/noticias2.pkl')
 df = dados.copy()
 df['url'] = df.url.apply(extrair_url)
 df = df[df.url.apply(filtrar_urls)]
 df = df[df.titulo.apply(filtrar_por_titulo)]
 df['data'] = df.data.apply(extrair_data)
 df['img'] = df.img.apply(ajustar_imagem)
-df = df.rename({'img': 'media', 'titulo': 'content'}, axis=1)
-df = df[['data', 'content', 'media']]
+df = df.rename({'img': 'media', 'titulo': 'content', 'url': 'news_url'}, axis=1)
+df = df[['data', 'content', 'media', 'news_url']]
 df['source'] = 'G1'
 df['data'] = df.data.apply(str)
 df = df.fillna('').drop_duplicates()
