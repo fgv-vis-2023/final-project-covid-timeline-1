@@ -47,12 +47,14 @@ button {
   left: 0;
   margin: 20px;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: black;
   border-radius: 5px;
   border: 1px solid #000;
   font-size: 20px;
   width:30%;
   height: 30%;
+  display: none;
+  
 }
 
 #title-anchor {
@@ -219,6 +221,7 @@ input:checked + .slider:before {
   padding: 10px 20px;
   background-color: #fff;
   font-size: 15px;
+  display: none;
 }
 
 #selectsource {

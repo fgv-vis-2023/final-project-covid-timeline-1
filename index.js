@@ -67,11 +67,18 @@ document.addEventListener('DOMContentLoaded', function (event) {
     const g1 = res[5]
 
     const news_data = {
-      'All': {...un, ...uol, ...g1},
-      'UN': un,
-      'UOL': uol,
-      'G1': g1
+      'all': {...un, ...uol, ...g1},
+      'un': un,
+      'uol': uol,
+      'g1': g1
     }
+
+    let selectedSource = 'all'
+    let selectedNewsData = news_data['all']
+    let availableDates = Object.keys(selectedNewsData)
+    availableDates.sort((a, b) => new Date(a) - new Date(b));
+    availableDates = availableDates.filter(v => new Date(v) > new Date('2020-01-01'))
+
 
     // Create a dictionary to map iso codes to country names
     const isoDict = {}
@@ -173,26 +180,22 @@ document.addEventListener('DOMContentLoaded', function (event) {
     function updateSelectedDateNews() {
       const newsTitleAnchor = document.getElementById('title-anchor')
       const newsCarousel = document.getElementById('news-carousel')
-      if(selectedDate in un) {
-        newsTitleAnchor.textContent = 'UN: ' + un[selectedDate][0].content
-        newsTitleAnchor.href = un[selectedDate][0].news_url
-        newsCarousel.style.backgroundImage = `url(${un[selectedDate][0].media})`
-        newsCarousel.style.backgroundSize = 'cover'
-        newsCarousel.style.backgroundRepeat = 'no-repeat'
-      }else {
-        if(selectedDate in uol) {
-          newsTitleAnchor.textContent = 'UOL: ' + uol[selectedDate][0].content
-          newsTitleAnchor.href = uol[selectedDate][0].news_url
-          newsCarousel.style.backgroundImage = `url(${uol[selectedDate][0].media})`
-          newsCarousel.style.backgroundSize = 'cover'
-          newsCarousel.style.backgroundRepeat = 'no-repeat'
-        }
+      // check if selectedDate is in availableDates
+      if (!availableDates.includes(selectedDate) || selectedNewsData[selectedDate].length == 0) {
+        newsTitleAnchor.textContent = 'No news for this date'
+        newsTitleAnchor.href = '#'
+        newsCarousel.style.backgroundImage = 'none'
+        return
       }
+      newsTitleAnchor.textContent =  selectedNewsData[selectedDate][0].source+': ' + selectedNewsData[selectedDate][0].content
+      newsTitleAnchor.href = selectedNewsData[selectedDate][0].news_url
+      newsCarousel.style.backgroundImage = `url(${selectedNewsData[selectedDate][0].media})`
+      newsCarousel.style.backgroundSize = 'cover'
+      newsCarousel.style.backgroundRepeat = 'no-repeat'
     }
     
     const newsMode = document.getElementById('news-mode-toggle')
     let newsModeBool = newsMode.checked
-    /* on click, print the state on or off */
     newsMode.addEventListener('click', () => {
       newsModeBool = newsMode.checked
       if (play) {
@@ -213,13 +216,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
         document.getElementById('plus').style.display = 'block'
         document.getElementById('steps').textContent = `Steps: ${speed} days`
       }
+      updateSelectedDateNews()
     })
-    newsMode.click()
-
+    
     // update the data based on the selected source
     document.getElementById('selectsource').addEventListener('change', () => {
       selectedSource = document.getElementById('selectsource').value
-      console.log(selectedSource)
+      selectedNewsData = news_data[selectedSource]
+      availableDates = Object.keys(selectedNewsData)
+      availableDates.sort((a, b) => new Date(a) - new Date(b));
+      // remove dates before 2020-01-01
+      availableDates = availableDates.filter(v => new Date(v) > new Date('2020-01-01'))
+  
+      updateSelectedDateNews()
     })
  
     function redraw () {
@@ -291,15 +300,16 @@ document.addEventListener('DOMContentLoaded', function (event) {
       .step(1)
       .height(30)
       .width(400)
-      .tickFormat(tick => ++tickIndex == (dates.length-1) || tickIndex == 1 ? dates[tick] : null)
-      .displayFormat(tick => dates[tick])
+      .tickFormat(tick => ++tickIndex == (dates.length-1) || tickIndex == 1 ? dates[tick-1] : null)
+      .displayFormat(tick => dates[tick-1])
       .default(0)
       .on('onchange', tick => {
-        selectedDate = dates[tick]
-        document.getElementById('date').textContent = formatDate(new Date(selectedDate))
+        
+        selectedDate = dates[tick-1]
+        document.getElementById('date').textContent = formatDate(new Date(selectedDate+'T00:00'))
         redraw()
         addTopList()
-        updateSelectedDateNews()
+        if (newsModeBool && !play) updateSelectedDateNews()
       })
     
     let speed=1;
@@ -351,10 +361,34 @@ document.addEventListener('DOMContentLoaded', function (event) {
       if(play) {
         play = false;
         document.getElementById('play').textContent = 'Play';
+        document.getElementById('steps').textContent = 'Start News Animation'
       } else {
         play = true;
         document.getElementById('play').textContent = 'Stop';
+        document.getElementById('steps').textContent = 'Stop News Animation'
+
       }
+      if (newsModeBool) {
+        // iterate over the 'availableDates' and update the slider
+        // for (let i = dates.indexOf(slider.value()); i < availableDates.length; i++) {
+        while(slider.value() < 1194 & play) {
+          selectedDate = dates[slider.value()];
+          let dateIndex = availableDates.indexOf(selectedDate);
+          slider.value(slider.value() + 1);
+          if(slider.value() >= 1193) {
+            play = false;
+            document.getElementById('play').textContent = 'Play';
+            slider.value(1)
+            break;
+          }
+          if (dateIndex == -1) continue;
+          updateSelectedDateNews();
+          await new Promise(r => setTimeout(r, 1500));
+        }
+
+        
+      }
+
       if (!newsModeBool) {
         while(slider.value() < 1200 & play) {
           slider.value(slider.value() + speed);
