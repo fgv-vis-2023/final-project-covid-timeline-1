@@ -101,7 +101,7 @@ def filtrar_por_titulo(titulo):
             return True
     return False
 
-dados = pd.read_pickle('/home/cleomar/Downloads/noticias2.pkl')
+
 df = dados.copy()
 df['url'] = df.url.apply(extrair_url)
 df = df[df.url.apply(filtrar_urls)]
