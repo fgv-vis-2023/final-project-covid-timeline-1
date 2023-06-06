@@ -1,4 +1,5 @@
 body {
+  color: #f5f5f5;
   background-color: #1f1f1f;
   display: flex;
   height: 100vh;
@@ -12,10 +13,10 @@ h1 {
 }
  
 a {
-  color: #000;
+  color: #f5f5f5;
   font-size: 20px;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: #1f1f1f;
   border-radius: 5px;
   margin-top: 50px;
 }
@@ -23,9 +24,9 @@ a {
 button {
   margin-top: 50px;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: #f5f5f5;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid #1f1f1f;
   font-size: 20px;
   cursor: pointer;
 }
@@ -36,9 +37,10 @@ button {
   left: 0;
   margin: 20px;
   padding: 10px 20px;
-  background-color: #fff;
+  color: #1f1f1f;
+  background-color: #f5f5f5;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid #f5f5f5;
   font-size: 20px;
 }
 
@@ -48,9 +50,9 @@ button {
   left: 0;
   margin: 20px;
   padding: 10px 20px;
-  background-color: black;
+  background-color: #f5f5f5;
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid #f5f5f5;
   font-size: 20px;
   width:30%;
   height: 30%;
@@ -210,7 +212,7 @@ input:checked + .slider:before {
   right: 0;
   margin: 20px;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: #1f1f1f;
   font-size: 15px;
 }
 
@@ -220,7 +222,7 @@ input:checked + .slider:before {
   right: 120px;
   margin: 20px;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: #1f1f1f;
   font-size: 15px;
   display: none;
 }
