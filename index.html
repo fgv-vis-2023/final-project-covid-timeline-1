@@ -14,6 +14,40 @@
   <link rel="stylesheet" href="./style.css"/>
 </head>
 <body>
+  <div id="initial-modal" class="initial-modal">
+    <div class="initial-modal-content">
+      <div id="page1" class="modal-page active">
+        <p class="page-text">O COVID-19 foi uma doença causada pelo vírus SARS-CoV-2 que se espalhou rapidamente pelo mundo.</p>
+        <button onclick="nextPage()">Continuar</button>
+      </div>
+        
+      <div id="page2" class="modal-page">
+        <p class="page-text">O surto inicial do COVID-19 foi identificado na cidade de Wuhan, na província de Hubei, na China, no final de 2019. Rapidamente, o vírus se espalhou de pessoa para pessoa, primeiro dentro do país e depois para outras nações ao redor do mundo. A velocidade de transmissão e a falta de imunidade prévia na população tornaram o COVID-19 uma ameaça significativa para a saúde pública global.</p>
+        <button onclick="nextPage()">Continuar</button>
+      </div>
+        
+      <div id="page3" class="modal-page">
+        <p class="page-text">A pandemia do COVID-19 teve um impacto sem precedentes em todo o mundo. Os sistemas de saúde enfrentaram uma pressão extrema devido ao grande número de casos, levando à escassez de leitos hospitalares, ventiladores e equipamentos de proteção individual. Muitos países implementaram medidas de isolamento social e quarentenas para conter a propagação do vírus, afetando a economia global, com o fechamento de empresas, o aumento do desemprego e a queda na produção.</p>
+        <button onclick="nextPage()">Continuar</button>
+      </div>
+        
+      <div id="page4" class="modal-page">
+        <p class="page-text">Além dos impactos na saúde e na economia, o COVID-19 também teve consequências sociais e psicológicas significativas. O distanciamento social e o isolamento afetaram a saúde mental das pessoas, gerando estresse, ansiedade e depressão. Eventos sociais, esportivos e culturais foram cancelados ou adiados, e as interações pessoais foram limitadas.</p>
+        <button onclick="nextPage()">Continuar</button>
+      </div>
+        
+      <div id="page5" class="modal-page">
+        <p class="page-text">Em 5 de maio de 2023, a Organização Mundial da Saúde (OMS) declarou o fim da Emergência de Saúde Pública da pandemia da COVID-19 em todo o planeta.</p>
+        <button onclick="nextPage()">Continuar</button>
+      </div>
+
+      <div id="page6" class="modal-page">
+        <p class="page-text">Veja a seguir uma linha do tempo que mostra um pouco do que foi essa crise mundial.</p>
+        <button onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <h1>Covid Evolution</h1>
   <h2><span id="variable">New Cases</span>: <span id="date"></span></h2>
   <div id="overview">

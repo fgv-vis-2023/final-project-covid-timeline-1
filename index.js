@@ -24,7 +24,38 @@ const formatDate = function(d) {
   let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
   return `${da} ${mo} ${ye}`;
 }
- 
+
+function nextPage() {
+  var pages = document.getElementsByClassName("modal-page");
+  var currentPage;
+  
+  for (var i = 0; i < pages.length; i++) {
+    if (pages[i].classList.contains("active")) {
+      currentPage = pages[i];
+      break;
+    }
+  }
+  
+  var nextPage = document.getElementById("page" + (parseInt(currentPage.id.slice(4)) + 1));
+  
+  if (nextPage) {
+      currentPage.classList.remove("active");
+      nextPage.classList.add("active");
+  }
+}
+
+// Função para fechar o modal
+function closeModal() {
+    const modal = document.getElementById("initial-modal");
+    modal.style.display = "none";
+}
+
+// Exibe o modal ao carregar a página
+window.onload = function() {
+    const modal = document.getElementById("initial-modal");
+    modal.style.display = "block";
+}
+
 document.addEventListener('DOMContentLoaded', function (event) {
   // Create a promise to load data
   Promise.all([
