@@ -398,11 +398,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
       if(play) {
         play = false;
         document.getElementById('play').textContent = 'Play';
-        document.getElementById('steps').textContent = 'Start News Animation'
+        if (newsModeBool) document.getElementById('steps').textContent = 'Start News Animation'
       } else {
         play = true;
         document.getElementById('play').textContent = 'Stop';
-        document.getElementById('steps').textContent = 'Stop News Animation'
+        if (newsModeBool) document.getElementById('steps').textContent = 'Stop News Animation'
 
       }
       if (newsModeBool) {
