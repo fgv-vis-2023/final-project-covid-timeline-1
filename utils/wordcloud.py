@@ -28,14 +28,12 @@ un = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project-
 uol = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project-covid-timeline-1/data/uol.json')
 
 df = pd.concat([g1, un, uol], ignore_index=True).groupby('data').sum().reset_index()
-df.data.apply()
 df['data'] = df.data.apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
 
 inicio = datetime(2020, 1, 1)
 fim = datetime(2020,4,1)
 while inicio < datetime(2023, 4, 1):
     palavras_periodo = df[(df.data >= inicio)&(df.data < fim)].titulo.sum()
-
     remover = stopwords.words('portuguese')
     remover.extend([
         'R$', 'NOVO', 'PEDE', 'MIL', 'DIZ', 'DURANTE', 'FAZ', 'PODE', 'ANUNCIA', 
