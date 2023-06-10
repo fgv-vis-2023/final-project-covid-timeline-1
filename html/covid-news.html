@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>COVID Evolution</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4.0.0/dist/d3-geo-projection.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-simple-slider@1.10.4/dist/d3-simple-slider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <script src="../scripts/covid-news.js"></script>
+  <link rel="stylesheet" href="../style/covid-timeline.css"/>
+</head>
+<body>
+  <h1>Covid Evolution</h1>
+  <h2><span id="variable">New Cases</span>: <span id="date"></span></h2>
+  <div id="overview">
+    <!--Create a selector where the user can choose
+    among Total Cases, New Cases, New Deaths, Total Deaths,
+    New Tests, Total Tests-->
+    <select id="selectvar">
+      <option value="total_cases">Total Cases</option>
+      <option value="new_cases">New Cases</option>
+      <option value="new_deaths">New Deaths</option>
+      <option value="total_deaths">Total Deaths</option>
+      <option value="7DMA">7 Days Moving Average (Cases)</option>
+    </select>
+    <ul id="toplist">
+    </ul>
+  </div>
+  <!--Add a news mode toggle switch at top right-->
+  <div id="news-mode" style="display: none;">
+    <label class="switch" id="news-switch">
+      <input type="checkbox" id="news-mode-toggle">
+      <span class="slider round"></span>
+    </label>
+    <p>News Mode</p>
+  </div>
+  
+  <!--Add a select input with the options: All, Uol, UN, G1-->
+  <div id="news-source">
+    <select id="selectsource">
+      <option value="all">All Media Sources</option>
+      <option value="uol">Uol</option>
+      <option value="un">UN</option>
+      <option value="g1">G1</option>
+    </select>
+  </div>
+
+  <div id="news-carousel">
+    <a href="#" id="title-anchor" target="_blank">Title</a>
+  </div>
+  <div id="chart"></div>
+  <!--Add a '-' before the button play and a '+' after the button play-->
+  <div id="animate">
+    <button id="minus">-</button>
+    <button id="play">Play</button>
+    <button id="plus">+</button>
+  </div>
+  <p id="steps">Steps: 1 days</p>
+  <a href="https://github.com/owid/covid-19-data/tree/master/public/data" target="_blank">Fonte dos dados(OWID)</a>
+  
+  
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <span id="chart-holder">
+        <canvas id="modal-chart"></canvas>
+      </span>
+    </div>
+  </div>  
+</body>
+</html>

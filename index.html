@@ -1,110 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>COVID Evolution</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4.0.0/dist/d3-geo-projection.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/d3-simple-slider@1.10.4/dist/d3-simple-slider.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-  <script src="./index.js"></script>
-  <link rel="stylesheet" href="./style.css"/>
+    <!-- Add css from style.css file -->
+    <link rel="stylesheet" href="style/home_style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-  <div id="initial-modal" class="initial-modal">
-    <div class="initial-modal-content">
-      <div id="page1" class="modal-page active">
-        <p class="page-text">O COVID-19 foi uma doença causada pelo vírus SARS-CoV-2 que se espalhou rapidamente pelo mundo.</p>
-        <button onclick="nextPage()">Continuar</button>
-      </div>
-        
-      <div id="page2" class="modal-page">
-        <p class="page-text">O surto inicial do COVID-19 foi identificado na cidade de Wuhan, na província de Hubei, na China, no final de 2019. Rapidamente, o vírus se espalhou de pessoa para pessoa, primeiro dentro do país e depois para outras nações ao redor do mundo. A velocidade de transmissão e a falta de imunidade prévia na população tornaram o COVID-19 uma ameaça significativa para a saúde pública global.</p>
-        <button onclick="nextPage()">Continuar</button>
-      </div>
-        
-      <div id="page3" class="modal-page">
-        <p class="page-text">A pandemia do COVID-19 teve um impacto sem precedentes em todo o mundo. Os sistemas de saúde enfrentaram uma pressão extrema devido ao grande número de casos, levando à escassez de leitos hospitalares, ventiladores e equipamentos de proteção individual. Muitos países implementaram medidas de isolamento social e quarentenas para conter a propagação do vírus, afetando a economia global, com o fechamento de empresas, o aumento do desemprego e a queda na produção.</p>
-        <button onclick="nextPage()">Continuar</button>
-      </div>
-        
-      <div id="page4" class="modal-page">
-        <p class="page-text">Além dos impactos na saúde e na economia, o COVID-19 também teve consequências sociais e psicológicas significativas. O distanciamento social e o isolamento afetaram a saúde mental das pessoas, gerando estresse, ansiedade e depressão. Eventos sociais, esportivos e culturais foram cancelados ou adiados, e as interações pessoais foram limitadas.</p>
-        <button onclick="nextPage()">Continuar</button>
-      </div>
-        
-      <div id="page5" class="modal-page">
-        <p class="page-text">Em 5 de maio de 2023, a Organização Mundial da Saúde (OMS) declarou o fim da Emergência de Saúde Pública da pandemia da COVID-19 em todo o planeta.</p>
-        <button onclick="nextPage()">Continuar</button>
-      </div>
+<body id="placeholder">
+    <header>
+      <h1 class="logo">COVID Timeline</h1>
+      <input type="checkbox" class="nav-toggle" id="nav-toggle">
+      <nav>
+        <ul>
+          <li> <a href="#covid-timeline">Covid Evolution</a></li>
+          <li> <a href="#covid-news">News Timeline</a></li>
+          <li> <a href="#word-cloud">Word Cloud</a></li>
+        </ul>
+      </nav>
+      
 
-      <div id="page6" class="modal-page">
-        <p class="page-text">Veja a seguir uma linha do tempo que mostra um pouco do que foi essa crise mundial.</p>
-        <button onclick="closeModal()">Fechar</button>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+    
+    <!-- Section One -->
+    
+    <section class="section-one">
+      <h2 class="header">Covid Viz</h2>
+      <p class="section-one-paragraph">COVID-19 Visualization project aims to provide a comprehensive and insightful overview of the pandemic. Through interactive visualizations and data analysis, we explore the evolution of COVID-19 cases, news timelines, and more. The project also features a word cloud of the latest news articles related to the pandemic. Dive into the data and stay informed with our engaging visualizations.</p>
+      <a href="" class="learn-more-btn">See </a> 
+    </section>
+    
+    <!-- Section Two -->
+    <section class="section=two">
+      <img src="assets/homeimg.png">
+    </section>
+    
+    <!-- Section Three -->
+    <section class="section-three">
+      <h3>See our work</h3>
+    </section>
+    
+    <!-- Section Four -->
+    <section class="section-four" id="covid-timeline">
+      <div class="flex-group">
+        <div>
+          <img src="assets/covid-timeline.png">
+        </div>
+        <div class="content-container">
+          <p>COVID-19 Visualization project aims to provide a comprehensive and insightful overview of the pandemic. Through interactive visualizations and data analysis, we explore the evolution of COVID-19 cases</p>
+          <a class="learn-more-btn section-four-btn" id="load-covid-timeline">See</a>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <h1>Covid Evolution</h1>
-  <h2><span id="variable">New Cases</span>: <span id="date"></span></h2>
-  <div id="overview">
-    <!--Create a selector where the user can choose
-    among Total Cases, New Cases, New Deaths, Total Deaths,
-    New Tests, Total Tests-->
-    <select id="selectvar">
-      <option value="total_cases">Total Cases</option>
-      <option value="new_cases">New Cases</option>
-      <option value="new_deaths">New Deaths</option>
-      <option value="total_deaths">Total Deaths</option>
-      <option value="7DMA">7 Days Moving Average (Cases)</option>
-    </select>
-    <ul id="toplist">
-    </ul>
-  </div>
-  <!--Add a news mode toggle switch at top right-->
-  <div id="news-mode">
-    <label class="switch" id="news-switch">
-      <input type="checkbox" id="news-mode-toggle">
-      <span class="slider round"></span>
-    </label>
-    <p>News Mode</p>
-  </div>
-  
-  <!--Add a select input with the options: All, Uol, UN, G1-->
-  <div id="news-source">
-    <select id="selectsource">
-      <option value="all">All Media Sources</option>
-      <option value="uol">Uol</option>
-      <option value="un">UN</option>
-      <option value="g1">G1</option>
-    </select>
-  </div>
-
-  <div id="news-carousel">
-    <a href="#" id="title-anchor" target="_blank">Title</a>
-  </div>
-  <div id="chart"></div>
-  <!--Add a '-' before the button play and a '+' after the button play-->
-  <div id="animate">
-    <button id="minus">-</button>
-    <button id="play">Play</button>
-    <button id="plus">+</button>
-  </div>
-  <p id="steps">Steps: 1 days</p>
-  <a href="https://github.com/owid/covid-19-data/tree/master/public/data" target="_blank">Fonte dos dados(OWID)</a>
-  
-  
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="modal-title"></h2>
-      <span id="chart-holder">
-        <canvas id="modal-chart"></canvas>
-      </span>
-    </div>
-  </div>  
-</body>
-</html>
+    </section>
+    
+    <!-- Section Five -->
+    <section class="section-five" id="covid-news">
+      <div class="flex-group section-five-flex-group">
+        <div>
+          <img src="assets/covid-news.png">
+        </div>
+        <div class="content-container">
+          <p>COVID-19 Visualization project aims to provide a comprehensive and insightful overview of the pandemic. Through interactive visualizations and data analysis, we explore the evolution of COVID-19 cases</p>
+          <a class="learn-more-btn section-four-btn" id="load-covid-news">See</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Section six -->
+    <section class="section-six" id="word-cloud">
+      <div class="flex-group">
+        <div>
+          <img src="assets/word-cloud.png">
+        </div>
+        <div class="content-container">
+          <p>COVID-19 Visualization project aims to provide a comprehensive and insightful overview of the pandemic. Through interactive visualizations and data analysis, we explore the evolution of COVID-19 cases</p>
+          <a class="learn-more-btn section-four-btn" id="load-word-cloud">See</a>
+        </div>
+      </div>
+    </section>  
+    <script>
+        document.getElementById('load-covid-timeline').addEventListener('click', function() {
+            window.location.href = 'html/covid-timeline.html';
+        });
+        document.getElementById('load-covid-news').addEventListener('click', function() {
+            window.location.href = 'html/covid-news.html';
+        });
+        document.getElementById('load-word-cloud').addEventListener('click', function() {
+            window.location.href = 'html/word-cloud.html';
+        });
+    </script>
+    
+  </body>
+  </html>  
