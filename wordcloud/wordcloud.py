@@ -1,7 +1,6 @@
 import pandas as pd
 import json
 from collections import Counter
-from PIL import Image
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from datetime import datetime
@@ -30,21 +29,22 @@ uol = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project
 df = pd.concat([g1, un, uol], ignore_index=True).groupby('data').sum().reset_index()
 df['data'] = df.data.apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
 
+lista_remocao = stopwords.words('portuguese')
+lista_remocao.extend([
+    'R$', 'NOVO', 'PEDE', 'MIL', 'DIZ', 'DURANTE', 'FAZ', 'PODE', 'ANUNCIA', 
+    'SAO', 'PAULO', 'VAI', 'RIO', 'JANEIRO', 'REGISTRA', 'DIAS',
+    'SOBRE', 'ANOS', 'COMPLETAM', 'FICA', 'DIA', '24'
+])
 inicio = datetime(2020, 1, 1)
-fim = datetime(2020,4,1)
-while inicio < datetime(2023, 4, 1):
+fim = inicio + relativedelta(months=1)
+while inicio < datetime(2023, 6, 1):
     palavras_periodo = df[(df.data >= inicio)&(df.data < fim)].titulo.sum()
-    remover = stopwords.words('portuguese')
-    remover.extend([
-        'R$', 'NOVO', 'PEDE', 'MIL', 'DIZ', 'DURANTE', 'FAZ', 'PODE', 'ANUNCIA', 
-        'SAO', 'PAULO', 'VAI', 'RIO', 'JANEIRO'
-        ])
-    for palavra in remover:
+    for palavra in lista_remocao:
         del palavras_periodo[palavra.upper()]
-
-    wc = WordCloud(background_color="black", width=1000, height=1000, max_words=30).generate_from_frequencies(dict(palavras_periodo))
-    plt.close()
-    plt.imshow(wc)
-    plt.savefig(f'./figures/{str(inicio.date())}.png')
+    WordCloud(mode='RGBA', background_color=None, width=1000, height=1000, max_words=30).generate_from_frequencies(dict(palavras_periodo)).to_file(f'./figures/{str(inicio.date())}.png')
+    # plt.close()
+    # plt.axis('off')
+    # plt.imshow(wc)
+    # plt.savefig(f'./figures/{str(inicio.date())}.png')
     inicio = fim
-    fim = inicio + relativedelta(months = 3)
+    fim = inicio + relativedelta(months = 1)
