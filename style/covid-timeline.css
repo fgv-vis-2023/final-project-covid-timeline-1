@@ -244,3 +244,73 @@ body {
   
   
   }
+  #return-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  #return-button a {
+    display: block;
+    width: 20px;
+    height: 25px;
+    background-color: #f1f1f1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #return-button a:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-135deg);
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+  }
+
+  #return-button-top a:hover {
+    background-color: #8b8b8b;
+  }
+
+  #return-button-top {
+    position: fixed;
+    top: 5px;
+    left: 20px;
+  }
+
+  #return-button-top a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #return-button-top a:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-135deg);
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+  }
+
+  #return-button-top a:hover {
+    background-color: #8b8b8b;
+  }
+

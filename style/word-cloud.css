@@ -75,3 +75,38 @@ img {
   font-family: 'Teko';
   letter-spacing: 0.15em;
 }
+
+#return-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+#return-button a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-color: #f1f1f1;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#return-button a:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-135deg);
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+}
+
+#return-button a:hover {
+  background-color: #8b8b8b;
+}
