@@ -199,8 +199,8 @@ nav a:hover {
 /* Section Four */
 
 .flex-group {
-  display: flex;
-  justify-content: ;
+  display: flex	;
+  justify-content: center;
   align-items: center;
   gap: 3rem;
 }
@@ -280,6 +280,12 @@ nav a:hover {
     flex-direction: column;
   }
 }
+
+.flex-group > div > img {
+  min-width: 800px; 
+  max-width: 800px;
+}
+
 
 /* Section Nine */
 
