@@ -199,8 +199,8 @@ nav a:hover {
 /* Section Four */
 
 .flex-group {
-  display: flex;
-  justify-content: ;
+  display: flex	;
+  justify-content: center;
   align-items: center;
   gap: 3rem;
 }
@@ -279,6 +279,10 @@ nav a:hover {
   .flex-group-eight {
     flex-direction: column;
   }
+}
+
+.flex-group > div > img {
+  min-width: 800px;  /* ou qualquer valor que você deseja */
 }
 
 /* Section Nine */
