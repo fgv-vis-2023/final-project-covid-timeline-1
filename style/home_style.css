@@ -282,8 +282,10 @@ nav a:hover {
 }
 
 .flex-group > div > img {
-  min-width: 800px;  /* ou qualquer valor que você deseja */
+  min-width: 800px; 
+  max-width: 800px;
 }
+
 
 /* Section Nine */
 
