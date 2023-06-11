@@ -112,23 +112,54 @@ const colors = [
       .style('color', 'white')
       .style('border-radius', '5px')
       .style('padding', '10px');
-   
+
+      function openNewsModal() {
+        play = false;
+        document.getElementById('play').textContent = 'Play';
+        const modal = document.getElementById('news-modal');
+        modal.setAttribute('on', 'true');
+        modal.style.display = 'block';
+        const closeButton = document.querySelector('.modal[on="true"] .close');
+        closeButton.addEventListener('click', closeModal);
+
+        const newsListTitle = document.getElementById('news-list-title');
+        newsListTitle.textContent = selectedDate;
+        // check if selectedDate is in availableDates
+        if (!availableDates.includes(selectedDate) || selectedNewsData[selectedDate].length == 0) {
+          document.getElementById('news-list').innerHTML = '<p>No news for this date</p>';
+          return
+        }
+        let item = '';
+        for(let i=0; i < selectedNewsData[selectedDate].length; i++) {
+          title =  selectedNewsData[selectedDate][i].content;
+          href = selectedNewsData[selectedDate][i].news_url;
+          media = selectedNewsData[selectedDate][i].media;
+          item = item + '<div class="news-list-item" style="background-image:url('+media+');"><a class="title-anchor" href='+href+' target="_blank">'+title+'</a></div>';
+        }
+        document.getElementById('news-list').innerHTML = item;
+      }
+      const showNews = document.getElementById('show-news');
+      showNews.addEventListener('click', openNewsModal);
+
       // Function to open the modal
       function openModal(countryName) {
+        play = false;
+        document.getElementById('play').textContent = 'Play';
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
         modal.style.display = 'block';
         modalTitle.textContent = countryName;
+        modal.setAttribute('on', 'true');
+        const closeButton = document.querySelector('.modal[on="true"] .close');
+        closeButton.addEventListener('click', closeModal);
       }
    
       // Function to close the modal
       function closeModal() {
-        const modal = document.getElementById('modal');
+        const modal = document.querySelector('.modal[on="true"]');
         modal.style.display = 'none';
+        modal.setAttribute('on', 'false');
       }
-   
-      const closeButton = document.getElementsByClassName('close')[0];
-      closeButton.addEventListener('click', closeModal);
    
       function updateModalContent(countryName, seriesData) {
         const modalTitle = document.getElementById('modal-title');

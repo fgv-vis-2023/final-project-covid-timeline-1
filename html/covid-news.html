@@ -49,9 +49,21 @@
     </select>
   </div>
 
-  <div id="news-carousel">
-    <a href="#" id="title-anchor" target="_blank">Title</a>
+  <div id="news">
+    <div id="news-carousel">
+      <a href="#" id="title-anchor" class="title-anchor" target="_blank">Title</a>
+    </div>
+    <p id="show-news">Ver mais notícias</p>
   </div>
+
+  <div id="news-modal" class="modal" on="false">
+    <div id="news-modal-content" class="modal-content">
+      <span class="close">&times;</span>
+      <p id="news-list-title"></p>
+      <div id="news-list"></div>
+    </div>
+  </div>
+
   <div id="chart"></div>
   <!--Add a '-' before the button play and a '+' after the button play-->
   <div id="animate">
@@ -63,7 +75,7 @@
   <a href="https://github.com/owid/covid-19-data/tree/master/public/data" target="_blank">Fonte dos dados(OWID)</a>
   
   
-  <div id="modal" class="modal">
+  <div id="modal" class="modal" on="false">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2 id="modal-title"></h2>
