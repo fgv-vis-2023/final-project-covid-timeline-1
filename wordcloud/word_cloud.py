@@ -22,9 +22,9 @@ def pegar_frequencias(arquivo):
     return df.titulo.apply(lambda x: Counter(x.split())).reset_index()
 
 
-g1 = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project-covid-timeline-1/data/g1.json')
-un = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project-covid-timeline-1/data/un.json')
-uol = pegar_frequencias('/home/cleomar/Documents/FGV/2023-1/viz/a2/final-project-covid-timeline-1/data/uol.json')
+g1 = pegar_frequencias('C:/Users/gusta/OneDriveFGV/Documentos/FGV/5periodo/poco/a2/final-project-covid-timeline-1/data/g1.json')
+un = pegar_frequencias('C:/Users/gusta/OneDriveFGV/Documentos/FGV/5periodo/poco/a2/final-project-covid-timeline-1/data/un.json')
+uol = pegar_frequencias('C:/Users/gusta/OneDriveFGV/Documentos/FGV/5periodo/poco/a2/final-project-covid-timeline-1/data/uol.json')
 
 df = pd.concat([g1, un, uol], ignore_index=True).groupby('data').sum().reset_index()
 df['data'] = df.data.apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
@@ -32,8 +32,8 @@ df['data'] = df.data.apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
 lista_remocao = stopwords.words('portuguese')
 lista_remocao.extend([
     'R$', 'NOVO', 'PEDE', 'MIL', 'DIZ', 'DURANTE', 'FAZ', 'PODE', 'ANUNCIA', 
-    'SAO', 'PAULO', 'VAI', 'RIO', 'JANEIRO', 'REGISTRA', 'DIAS',
-    'SOBRE', 'ANOS', 'COMPLETAM', 'FICA', 'DIA', '24'
+    'SAO', 'PAULO', 'VAI', 'RIO', 'JANEIRO', 'REGISTRA', 'DIAS', 'SP',
+    'SOBRE', 'ANOS', 'COMPLETAM', 'FICA', 'DIA', '24', 'USO', '6', 'POST', 'QUAIS'
 ])
 inicio = datetime(2020, 1, 1)
 fim = inicio + relativedelta(months=1)
@@ -41,7 +41,7 @@ while inicio < datetime(2023, 6, 1):
     palavras_periodo = df[(df.data >= inicio)&(df.data < fim)].titulo.sum()
     for palavra in lista_remocao:
         del palavras_periodo[palavra.upper()]
-    WordCloud(mode='RGBA', background_color=None, width=1000, height=1000, max_words=30).generate_from_frequencies(dict(palavras_periodo)).to_file(f'./figures/{str(inicio.date())}.png')
+    WordCloud(mode='RGBA', background_color=None, colormap='Set2', width=1000, height=1000, max_words=30).generate_from_frequencies(dict(palavras_periodo)).to_file(f'./assets/figures/{str(inicio.date())}.png')
     # plt.close()
     # plt.axis('off')
     # plt.imshow(wc)
