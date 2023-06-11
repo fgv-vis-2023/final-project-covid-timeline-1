@@ -122,8 +122,6 @@ const colors = [
         const closeButton = document.querySelector('.modal[on="true"] .close');
         closeButton.addEventListener('click', closeModal);
 
-        const newsListTitle = document.getElementById('news-list-title');
-        newsListTitle.textContent = selectedDate;
         // check if selectedDate is in availableDates
         if (!availableDates.includes(selectedDate) || selectedNewsData[selectedDate].length == 0) {
           document.getElementById('news-list').innerHTML = '<p>No news for this date</p>';
