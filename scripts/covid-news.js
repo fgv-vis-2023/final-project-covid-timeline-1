@@ -124,7 +124,7 @@ const colors = [
 
         // check if selectedDate is in availableDates
         if (!availableDates.includes(selectedDate) || selectedNewsData[selectedDate].length == 0) {
-          document.getElementById('news-list').innerHTML = '<p>No news for this date</p>';
+          document.getElementById('news-list').innerHTML = '<p style="text-align:center;padding-top:20%;">No news for this date</p>';
           return
         }
         let item = '';
