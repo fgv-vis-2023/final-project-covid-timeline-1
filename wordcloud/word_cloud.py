@@ -32,7 +32,7 @@ lista_remocao = stopwords.words('portuguese')
 lista_remocao.extend([
     'R$', 'NOVO', 'PEDE', 'MIL', 'DIZ', 'DURANTE', 'FAZ', 'PODE', 'ANUNCIA', 
     'SAO', 'PAULO', 'VAI', 'RIO', 'JANEIRO', 'REGISTRA', 'DIAS', 'SP', 'CONTRA', 'APÓS',
-    'SOBRE', 'ANOS', 'COMPLETAM', 'FICA', 'DIA', '24', 'USO', '6', 'POST', 'QUAIS'
+    'SOBRE', 'ANOS', 'COMPLETAM', 'FICA', 'DIA', '24', 'USO', '6', 'POST', 'QUAIS', 'COVID-19', 'CORONAVÍRUS', 'COVID'
 ])
 inicio = datetime(2020, 1, 1)
 fim = inicio + relativedelta(months=1)
