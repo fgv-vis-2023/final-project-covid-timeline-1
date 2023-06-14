@@ -286,18 +286,99 @@ const colors = [
       redraw()
    
       // Function to add the top 10 countries with the most cumulative cases to the 'toplist' ul
-      function addTopList () {
-        const topList = document.getElementById('toplist')
-        topList.innerHTML = ''
-        const dataByDate = data.filter(v => v.date === selectedDate)
-        dataByDate.sort((a, b) => b[selectedVar] - a[selectedVar])
-        dataByDate.slice(0, 10).forEach(v => {
-          const li = document.createElement('li')
-          li.textContent = `${isoDict[v.iso_code]}: ${v[selectedVar]}`
-          topList.appendChild(li)
+      function addTopList() {
+        const topList = document.getElementById('toplist');
+        topList.innerHTML = '';
+      
+        const dataByDate = data.filter(v => v.date === selectedDate);
+        dataByDate.sort((a, b) => b[selectedVar] - a[selectedVar]);
+        const topData = dataByDate.slice(0, 10);
+      
+        // Clear existing chart if present
+        d3.select('#toplist').selectAll('*').remove();
+      
+        // Create SVG container for the chart
+        const svg = d3.select('#toplist')
+          .append('svg')
+          .attr('width', 400)
+          .attr('height', 400);
+      
+        // Define the scales
+        const xScale = d3.scaleLinear()
+          .domain([0, d3.max(topData, d => d[selectedVar])+8000])
+          .range([0, 400]);
+      
+        const yScale = d3.scaleBand()
+          .domain(topData.map(d => isoDict[d.iso_code]))
+          .range([0, 300])
+          .padding(0.1);
+      
+        // Create the bars
+        const bars = svg.selectAll('rect')
+          .data(topData)
+          .join('rect')
+          .attr('x', 0)
+          .attr('y', d => yScale(isoDict[d.iso_code]))
+          .attr('width', d => xScale(d[selectedVar]))
+          .attr('height', yScale.bandwidth())
+          .attr('fill', 'steelblue')
+          .attr('id', d => `bar-${isoDict[d.iso_code]}`);
+      
+        // Create the labels
+        svg.selectAll('.country-label')
+          .data(topData)
+          .join('text')
+          .text(d => `${isoDict[d.iso_code]}`)
+          .attr('class', 'country-label')
+          .attr('x', 5)
+          .attr('y', d => yScale(isoDict[d.iso_code]) + yScale.bandwidth() / 2)
+          .attr('dy', '0.35em')
+          .attr('fill', 'white')
+          .attr('font-family', 'Arial, sans-serif')
+          .attr('font-size', '12px')
+          .attr('id', d => `label-${isoDict[d.iso_code]}`);
+      
+        // Create count labels
+        svg.selectAll('.count-label')
+          .data(topData)
+          .join('text')
+          .text(d => `${d[selectedVar]}`)
+          .attr('class', 'count-label')
+          .attr('x', 5)
+          .attr('y', d => yScale(isoDict[d.iso_code]) + yScale.bandwidth() / 2)
+          .attr('dy', '0.35em')
+          .attr('fill', 'white')
+          .attr('font-family', 'Arial, sans-serif')
+          .attr('font-size', '12px')
+          .style('opacity', 0)
+          .attr('id', d => `count-${isoDict[d.iso_code]}`);
+
+
+        // Show count labels on hover
+        bars.on('mouseover', function() {
+          d3.select(this)
+            .attr('fill', 'orange')
+          let selectedBar = d3.select(this).attr('id').split('-')[1];
+          console.log(d3.select(`#count-${selectedBar}`));
+          document.getElementById(`count-${selectedBar}`).style.opacity = 1;
+          document.getElementById(`label-${selectedBar}`).style.opacity = 0;
         })
+          .on('mouseout', function() {
+            d3.select(this)
+              .attr('fill', 'steelblue')
+            let selectedBar = d3.select(this).attr('id').split('-')[1];
+            document.getElementById(`count-${selectedBar}`).style.opacity = 0;
+            document.getElementById(`label-${selectedBar}`).style.opacity = 1;
+          });
       }
-      addTopList()
+      
+      addTopList();
+      
+      
+      
+      
+      
+      
    
       document.getElementById('date').textContent = formatDate(new Date(selectedDate))
       document.getElementById('variable').textContent = naming_dict[selectedVar]
