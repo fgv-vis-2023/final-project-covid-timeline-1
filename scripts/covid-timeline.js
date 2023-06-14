@@ -36,7 +36,6 @@ const colors = [
       d3.json('../data/g1.json')
   
     ]).then((res) => {
-      console.log(res)
       // Dimensions
       const width = 1200
       const height = 600
@@ -359,7 +358,6 @@ const colors = [
           d3.select(this)
             .attr('fill', 'orange')
           let selectedBar = d3.select(this).attr('id').split('-')[1];
-          console.log(d3.select(`#count-${selectedBar}`));
           document.getElementById(`count-${selectedBar}`).style.opacity = 1;
           document.getElementById(`label-${selectedBar}`).style.opacity = 0;
         })
