@@ -383,3 +383,10 @@ body {
     pointer-events: none;
   }
   
+  #modal-title{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    fill: black!important;
+    color: black!important;
+    pointer-events: none;
+  }
