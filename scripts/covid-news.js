@@ -64,9 +64,35 @@ const colors = [
       const uol = res[4]
       // G1 news data
       const g1 = res[5]
-  
+      console.log(g1)
+      const mergedDict = {};
+
+      // Function to merge contents for a given date
+      function mergeContents(date, dict, mergedDict) {
+        if (!mergedDict[date]) {
+          mergedDict[date] = [];
+        }
+        mergedDict[date] = mergedDict[date].concat(dict[date]);
+      }
+
+      // Merge 'g1'
+      for (const date in g1) {
+        mergeContents(date, g1, mergedDict);
+      }
+
+      // Merge 'uol'
+      for (const date in uol) {
+        mergeContents(date, uol, mergedDict);
+      }
+
+      // Merge 'un'
+      for (const date in un) {
+        mergeContents(date, un, mergedDict);
+      }
+
+
       const news_data = {
-        'all': {...un, ...uol, ...g1},
+        'all': mergedDict,
         'un': un,
         'uol': uol,
         'g1': g1
