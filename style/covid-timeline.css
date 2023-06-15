@@ -38,8 +38,9 @@ body {
     margin: 20px;
     padding: 10px 20px;
     color: #1f1f1f;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     font-size: 20px;
+    border-radius: 6px;
     display:block;
   }
   
