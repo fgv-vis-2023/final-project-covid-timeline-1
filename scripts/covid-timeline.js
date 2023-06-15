@@ -228,6 +228,14 @@ const colors = [
       //   }
       //   updateSelectedDateNews()
       // })
+      function selectDate() {
+        selectedDate = document.getElementById('select-date-field').value;
+        dateIndex = dates.indexOf(selectedDate);
+        slider.value(dateIndex + 1);
+      }
+      const selectDateButton = document.getElementById('select-date');
+      selectDateButton.addEventListener('click', selectDate);
+
       
       // update the data based on the selected source
       document.getElementById('selectsource').addEventListener('change', () => {
@@ -429,5 +437,14 @@ const colors = [
         .call(slider)
    
     })
+
+    $(function() {
+      $('#datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        startDate: "2020-01-01",
+        endDate: "2023-04-09",
+        autoclose: true
+      });
+    });
   })
    

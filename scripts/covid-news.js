@@ -139,6 +139,14 @@ const colors = [
       const showNews = document.getElementById('show-news');
       showNews.addEventListener('click', openNewsModal);
 
+      function selectDate() {
+        selectedDate = document.getElementById('select-date-field').value;
+        dateIndex = dates.indexOf(selectedDate);
+        slider.value(dateIndex + 1);
+      }
+      const selectDateButton = document.getElementById('select-date');
+      selectDateButton.addEventListener('click', selectDate);
+
       // Function to open the modal
       function openModal(countryName) {
         play = false;
@@ -461,5 +469,14 @@ const colors = [
         .call(slider)
    
     })
+
+    $(function() {
+      $('#datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        startDate: "2020-01-01",
+        endDate: "2023-04-09",
+        autoclose: true
+      });
+    });
   })
    
