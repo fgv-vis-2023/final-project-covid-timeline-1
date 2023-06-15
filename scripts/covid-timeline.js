@@ -328,7 +328,7 @@ const colors = [
           .attr('y', d => yScale(isoDict[d.iso_code]))
           .attr('width', d => xScale(d[selectedVar]))
           .attr('height', yScale.bandwidth())
-          .attr('fill', 'steelblue')
+          .attr('fill', 'rgb(97, 22, 22)')
           .attr('id', d => `bar-${isoDict[d.iso_code]}`);
       
         // Create the labels
@@ -371,7 +371,7 @@ const colors = [
         })
           .on('mouseout', function() {
             d3.select(this)
-              .attr('fill', 'steelblue')
+              .attr('fill', 'rgb(97, 22, 22)')
             let selectedBar = d3.select(this).attr('id').split('-')[1];
             document.getElementById(`count-${selectedBar}`).style.opacity = 0;
             document.getElementById(`label-${selectedBar}`).style.opacity = 1;
