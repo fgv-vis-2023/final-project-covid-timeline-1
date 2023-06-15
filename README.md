@@ -1,1 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/bJdnex5_)
+# Decisões e divisão das tarefas
+
+Inicialmente, o grupo optou por darmos continuidade ao trabalho da A3, como grande desafio a implementação de notícias em cada dia da pandemia. Até essa parte fizemos as tarefas em conjunto, dado que nosso objetivo estava bem centralizado em uma visualização. Apesar disso, o Gabriel Pastori emergiu mais no assunto que os outros membros. Após o MVP, o Cleomar ficou responsável pela WordCloud e o Gustavo construiu o design e escreveu o paper. Por fim, outras sugestões do Peer Critique foram levantadas em conjunto entre os membros, que trabalharam ardualmente para resolver as problemáticas restantes. 
+
+# Links

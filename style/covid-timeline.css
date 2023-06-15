@@ -38,9 +38,7 @@ body {
     margin: 20px;
     padding: 10px 20px;
     color: #1f1f1f;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    border: 1px solid #f5f5f5;
+    background-color: rgba(0, 0, 0, 0.8);
     font-size: 20px;
     display:block;
   }
@@ -371,3 +369,17 @@ body {
     background-color: #8b8b8b;
   }
 
+  .country-label {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    fill: white!important;
+    pointer-events: none;
+  }
+  
+  .count-label {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    fill: white!important;
+    pointer-events: none;
+  }
+  

@@ -36,7 +36,6 @@ const colors = [
       d3.json('../data/g1.json')
   
     ]).then((res) => {
-      console.log(res)
       // Dimensions
       const width = 1200
       const height = 600
