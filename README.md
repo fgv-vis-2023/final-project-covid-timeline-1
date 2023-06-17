@@ -4,4 +4,4 @@ Inicialmente, o grupo optou por darmos continuidade ao trabalho da A3, como gran
 
 # Links
 
-[Video Teaser]([https://exemplo.com/](https://youtu.be/tCh_8fDtL8Y))
+[Video Teaser](https://youtu.be/tCh_8fDtL8Y)
